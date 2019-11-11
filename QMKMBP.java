@@ -4,7 +4,7 @@ public class QMKMBP{ //quantum modulo karatsuba multiplier for binary polynomial
   //use random polynomials for multiplication if true
   boolean random = true;
   int n =1024; //size of field
-  int[] m = {n, 333,135,73, 0}; //fixed field polynomial. primitive & descending order. 
+  int[] m = {n, 19,6,1, 0}; //fixed field polynomial. primitive & descending order. 
   
   public void run(){
     //setup
@@ -14,8 +14,8 @@ public class QMKMBP{ //quantum modulo karatsuba multiplier for binary polynomial
     Karatsuba ka = new Karatsuba(q);
     Constmult cm = new Constmult(f, m, q);
     ModKaratsuba mk = new ModKaratsuba(q, cm, ka);
-    byte[] a = {0,1,1,0,0,0,0,1,1,1}; //if random is set to false, it will multiply a by b
-    byte[] b = {0,0,1,0,0,1,1,1,0,1};
+    byte[] a = {0,0,1,0}; //if random is set to false, it will multiply a by b
+    byte[] b = {1,0,1,1};
       
     //setup qbits. qbits are a single array, where the first $n$ bits will by multiplied by the second $n$ bits and stored in the third $n$ bits
     if (random){
@@ -40,10 +40,10 @@ public class QMKMBP{ //quantum modulo karatsuba multiplier for binary polynomial
     } 
     
     mk.modmult(n, m, 0, n, 2*n, qbits);
-    
+    //pa(qbits);
     check(qbits, checkbits);
     System.out.println("CNOT: " + q.CNOTc + ", TOF: " + q.TOFc + ", depth upper bound: " + q.depth);
-    //System.out.println("Upper bound for depth per mult: " + cm.depth()[0] + ", CNOTs per mult: " + cm.depth()[1]); //was used for depth/CNOT count for table 1
+    System.out.println("Upper bound for depth per mult: " + cm.depth()[0] + ", CNOTs per mult: " + cm.depth()[1]); //was used for depth/CNOT count for table 1
   }
     
   public void check(byte[] left, byte[] right){ //calculate the correct answer for right and see if it matches left
