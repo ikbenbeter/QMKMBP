@@ -1,4 +1,4 @@
 # QMKMBP
-quantum modulo karatsuba multiplier for binary polynomials
+Reversible modular division, for use with my master thesis
 
-Run QMKMBP with your choice of field and polynomial.
+Use QuantumModDivision with your choice of field and polynomial to get number of TOF and CNOT gates, space and a check for the correct answer
