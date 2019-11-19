@@ -15,6 +15,12 @@ public class PLU{
     makematrix();
   }
   
+  public PLU(int[] a){
+    m = a;
+    n = m[0];
+    makeSquareMatrix();
+  }
+  
   public void setfm(int[] a, int[] b){ //make sure f and m both contain no negatives and m is in descending order
     f = a;
     m = b;
@@ -37,6 +43,26 @@ public class PLU{
             for(int i1 = 1; i1 < m.length; i1++){
               l.push(k-n+m[i1]);
             }
+          }
+        }
+      }
+    }
+  }
+  
+  public void makeSquareMatrix(){
+    G = new boolean[n][n];
+    Stack<Integer> l;
+    int k;
+    for(int j = 0; j < n; j++){
+      l = new Stack<Integer>();
+      l.push(2*j);
+      while(!l.empty()){
+        k = l.pop();
+        if(k<n){
+          G[k][j] = G[k][j] ^ true;
+        } else {
+          for(int i = 1; i < m.length; i++){
+            l.push(k-n+m[i]);
           }
         }
       }

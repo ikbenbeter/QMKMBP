@@ -19,6 +19,9 @@ public class ModKaratsuba{
   public void modmult(int n, int[] m, int a, int b, int c, byte[] d){
     e = n;
     int k = n - n/2;
+    for(int i = 0; i < k; i++){
+      q.reverseshift(n, c, d, m);
+    }
     q.ADD(n-k,a+k,a,d);
     q.ADD(n-k,b+k,b,d);
     ka.kmult(k,a, b, c, d);
